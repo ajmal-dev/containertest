@@ -1,0 +1,16 @@
+version: "3"
+services:
+  chrome:
+    container_name: ChromeDebug
+    image: selenium/standalone-chrome-debug:latest
+    volumes:
+      - /dev/shm:/dev/shm
+    ports:
+      - "4444:4444"
+  testContainer1:
+    image: vinsdocker/containertest:demo
+    container_name: google-test-Container
+    depends_on:
+      - chrome
+    volumes:
+      - /home/user/testresult:/output

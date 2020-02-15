@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>sampleTest</groupId>
+    <artifactId>sampleTest</artifactId>
+    <version>1SNAPSHOT</version>
+
+    <build>
+        <!-- Source directory configuration -->
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- vinsdocker is org name. -->
+                    <!-- containertest is the name of the image /  application  -->
+                    <repository>vinsdocker/containertest</repository>
+                    <!-- version of your image: could be sprint11 or release5 etc -->
+                    <tag>demo</tag>
+                </configuration>
+
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.directory}/libs
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Following plugin executes the testng tests -->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-surefire-plugin</artifactId>-->
+<!--                <version>3.0.0-M4</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; Suite testng xml file to consider for test execution &ndash;&gt;-->
+<!--                    <suiteXmlFiles>-->
+<!--                        <suiteXmlFile>testng.xml</suiteXmlFile>-->
+<!--                    </suiteXmlFiles>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            &lt;!&ndash; Compiler plugin configures the java version to be usedfor compiling-->
+<!--                the code &ndash;&gt;-->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
+        <dependency>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+            <version>1.4.13</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.1.0</version>
+<!--            <scope>test</scope>-->
+        </dependency>
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.seleniumhq.selenium</groupId>-->
+<!--            <artifactId>selenium-server</artifactId>-->
+<!--            <version>3.141.59</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.6-jre</version>
+            <classifier></classifier>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.beust/jcommander -->
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.72</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M4</version>
+            <type>maven-plugin</type>
+        </dependency>
+    </dependencies>
+
+
+</project>
