@@ -3,7 +3,6 @@
 <suite name="Suite">
     <test name="test1">
         <classes>
-
             <class name="test.java.testcases.test"/>
         </classes>
     </test>

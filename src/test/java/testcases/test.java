@@ -14,11 +14,13 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import test.java.globalFunctions.extentReport;
 import test.java.globalFunctions.mailing;
 import test.java.globalFunctions.propertiesReader;
+import test.java.globalFunctions.runChromeImage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,6 +33,11 @@ import java.util.concurrent.TimeUnit;
 
 public class test
 {
+@BeforeTest
+        public void InitialSet() throws IOException, InterruptedException {
+    runChromeImage run=new runChromeImage();
+    run.createChromeContainer();
+}
     //Create an instance of the extent report Class
     extentReport reportObject=new extentReport();
     mailing mail=new mailing();
