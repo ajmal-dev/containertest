@@ -1,0 +1,6 @@
+test/java/globalFunctions/extentReport.class
+test/java/globalFunctions/propertiesReader.class
+test/java/globalFunctions/launch.class
+test/java/globalFunctions/mailing.class
+test/java/pages/googlePageObjects.class
+test/java/testcases/test.class

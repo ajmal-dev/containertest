@@ -3,51 +3,32 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import org.apache.commons.mail.EmailException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import test.java.globalFunctions.extentReport;
-import test.java.globalFunctions.mailing;
-import test.java.globalFunctions.propertiesReader;
-import test.java.globalFunctions.runChromeImage;
+import test.java.globalFunctions.*;
+import test.java.pages.googlePageObjects;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class test
 {
-@BeforeTest
-        public void InitialSet() throws IOException, InterruptedException {
-    runChromeImage run=new runChromeImage();
-    run.createChromeContainer();
-}
-    //Create an instance of the extent report Class
-    extentReport reportObject=new extentReport();
-    mailing mail=new mailing();
-    propertiesReader propfile=new propertiesReader();
-
-    public test() throws FileNotFoundException {
-    }
+    public test() throws IOException, InterruptedException { }
+    launch l=new launch();                            //Instance of launch class for driver instantiation.
+    propertiesReader propfile=new propertiesReader(); //Instance of properties reader file
+    RemoteWebDriver driver=l.launching(propfile.propertiesRead("webbrowser")); //initializing the Remotewebdriver
+    extentReport reportObject=new extentReport();     // Instance of extent report
+    mailing mail=new mailing();                       //mailing instance
+    WebDriverWait wait=new WebDriverWait(driver,20);
+    googlePageObjects gpageObjects=new googlePageObjects(driver); //google search page object factory.
 
 
-    @Test
+    @Test                                             // Testcase for searching a subject on google
     public void Openapp() throws IOException, InterruptedException
 {
     reportObject.extent.attachReporter(reportObject.htmlReporter);
@@ -60,17 +41,7 @@ public class test
     ExtentTest node3=test1.createNode("Search the subject","Click on the search button for searching the subject");
     Thread.sleep(3000);
 
-    //Remote Web driver
-    DesiredCapabilities dc=DesiredCapabilities.chrome();
-    // Provide the Ipaddress of the local machine (Note: In numerics)
-    URL url=new URL("http://"+propfile.propertiesRead("Standalone_server_ipAddress")+":4444/wd/hub");
-    RemoteWebDriver driver=new RemoteWebDriver(url,dc);
 
-    //Driver
-//    System.setProperty("webdriver.chrome.driver","drivers/chromedriver");
-//    WebDriver driver=new ChromeDriver();
-    //Webdriver wait instance for creating explicit waits.
-    WebDriverWait wait=new WebDriverWait(driver,20);
     try
     {
         driver.get("http://www.google.com");
@@ -88,10 +59,10 @@ public class test
     }
     node1.log(Status.PASS,"The google page is loaded");
     System.out.println(driver.getTitle());
-    By googleSearchField=By.xpath("//input[@title='Search']");
     try
     {
-        driver.findElement(googleSearchField).sendKeys("HongKong", Keys.ENTER);
+        gpageObjects.enterSubject("Hongkong");
+
     }
     catch (Exception e)
     {
@@ -113,14 +84,12 @@ public class test
      driver.quit();
 
 }
-@AfterTest
-    void endTest() throws EmailException, IOException {
+
+    @AfterTest                                        // Flushing the report and sending extent report via mail
+    void endTest() throws EmailException, IOException
+{
     reportObject.extent.flush();
     mail.sendMail();
-    }
-
-
-
-
+}
 
 }

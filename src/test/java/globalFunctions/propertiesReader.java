@@ -12,7 +12,7 @@ public class propertiesReader {
         Properties prop = new Properties();
         InputStream input = null;
         try {
-            input = new FileInputStream("Global-properties.properties");
+            input = new FileInputStream("/usr/properties.properties");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

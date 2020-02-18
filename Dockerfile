@@ -1,4 +1,6 @@
 FROM openjdk:8-jre-slim
+WORKDIR /usr
+ADD  properties.properties properties.properties
 WORKDIR /usr/share/tag
 # Add the jar with all the dependencies
 ADD  target/sampleTest-1SNAPSHOT.jar sampleTest-1SNAPSHOT.jar

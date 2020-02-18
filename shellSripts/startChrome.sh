@@ -1,2 +1,2 @@
-cd dockercomposeChrome/
-sudo docker-compose up -d
+cd usr/shellscripts/
+docker-compose up -d
