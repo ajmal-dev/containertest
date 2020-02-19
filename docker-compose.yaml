@@ -8,9 +8,11 @@ services:
     ports:
       - "4444:4444"
   testContainer1:
-    image: vinsdocker/containertest:demo
+    image: testcasecontainerimage:demo
     container_name: google-test-Container
     depends_on:
       - chrome
-    volumes:
-      - /home/user/testresult:/output
+networks:
+  default:
+    external:
+      name: my-net

@@ -1,5 +1,6 @@
 FROM openjdk:8-jre-slim
 WORKDIR /usr
+ADD docker-compose.yaml docker-compose.yaml
 ADD  properties.properties properties.properties
 WORKDIR /usr/share/tag
 # Add the jar with all the dependencies

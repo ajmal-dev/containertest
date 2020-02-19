@@ -52,7 +52,7 @@ public class test
     }
     By googleLogo=By.xpath("//img[@alt='Google']");
     try {
-        wait.until(ExpectedConditions.titleIs("Google"));
+        wait.until(ExpectedConditions.titleIs("www.google.com"));
     }catch (Exception e)
     {
         e.printStackTrace();

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="38742" started-at="2020-02-19T17:24:20 IST" finished-at="2020-02-19T17:24:59 IST">
+    <groups>
+    </groups>
+    <test name="test1" duration-ms="38742" started-at="2020-02-19T17:24:20 IST" finished-at="2020-02-19T17:24:59 IST">
+      <class name="test.java.testcases.test">
+        <test-method status="PASS" signature="Openapp()[pri:0, instance:test.java.testcases.test@7b36aa0c]" name="Openapp" duration-ms="33318" started-at="2020-02-19T17:24:20 IST" finished-at="2020-02-19T17:24:53 IST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Openapp -->
+        <test-method status="PASS" signature="endTest()[pri:0, instance:test.java.testcases.test@7b36aa0c]" name="endTest" is-config="true" duration-ms="5385" started-at="2020-02-19T17:24:53 IST" finished-at="2020-02-19T17:24:59 IST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- endTest -->
+      </class> <!-- test.java.testcases.test -->
+    </test> <!-- test1 -->
+  </suite> <!-- Suite -->
+</testng-results>
